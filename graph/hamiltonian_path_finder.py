@@ -39,16 +39,8 @@ class HamiltonianPathFinder:
                 if current_edge.vertex1 == current_vertex or current_edge.vertex2 == current_vertex:
                     path = self.find_permutation(current_vertex, edge_id)
                     if len(path) == len(vertexes):
-                        if len(paths) == 1 or self._path_not_redundant(path):
-                            # If paths has only one path, just insert it.
-                            # Else check if a similar path was not inserted into paths already.
-                            paths.append(path)
+                        paths.append(path)
         return paths
-
-    def _path_not_redundant(self, path: list) -> bool:
-        for vertex in path:
-            pass
-        return False
 
     def _find_path(self, vertex: str, edge_id: int):
         self._path.append(vertex)
