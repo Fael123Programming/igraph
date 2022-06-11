@@ -46,11 +46,11 @@ class Graph:
     def is_eulerian(self) -> bool:
         if self.is_null() or self.is_empty():
             return False
-        odd_vertexes = 0
+        odd_vertices = 0
         for vertex in self._vertices:
             if self.degree_of(vertex) % 2 == 1:
-                odd_vertexes += 1
-        return odd_vertexes == 2 or odd_vertexes == 0
+                odd_vertices += 1
+        return odd_vertices == 2 or odd_vertices == 0
 
     def is_hamiltonian(self) -> bool:
         from hamiltonian_cycle_finder import HamiltonianCycleFinder
