@@ -1,4 +1,4 @@
-from graph.graph import Graph
+from graph import Graph
 
 if __name__ == '__main__':
     g1 = Graph('g1')

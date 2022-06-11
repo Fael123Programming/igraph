@@ -1,23 +1,23 @@
-from graph.edge import Edge
+from edge import Edge
 from errors import ImpossibleToCreateEdgeError, NonexistentVertexError
 
 
 class Graph:
-    __slots__ = ["_name", "_vertexes", "_edges"]
+    __slots__ = ["_name", "_vertices", "_edges"]
 
     def __init__(self, name: str):
         self._name = name
-        self._vertexes = []
+        self._vertices = []
         self._edges = []
 
     def add_vertex(self, vertex_name: str):
-        self._vertexes.append(vertex_name)
+        self._vertices.append(vertex_name)
 
     def delete_vertex(self, vertex_name: str):
-        self._vertexes.remove(vertex_name)
+        self._vertices.remove(vertex_name)
 
     def order(self):
-        return len(self._vertexes)
+        return len(self._vertices)
 
     def size(self):
         return len(self._edges)
@@ -47,24 +47,28 @@ class Graph:
         if self.is_null() or self.is_empty():
             return False
         odd_vertexes = 0
-        for vertex in self._vertexes:
+        for vertex in self._vertices:
             if self.degree_of(vertex) % 2 == 1:
                 odd_vertexes += 1
         return odd_vertexes == 2 or odd_vertexes == 0
 
     def is_hamiltonian(self) -> bool:
+        from hamiltonian_cycle_finder import HamiltonianCycleFinder
         if self.order() < 3:
             return False
-        return self.get_smallest_degree() >= self.order() / 2  # Dirac Theorem
+        if self.get_smallest_degree() >= self.order() / 2:  # Dirac's theorem
+            return True
+        hcf = HamiltonianCycleFinder(self)
+        return len(hcf.find_all()) >= 1
 
     def get_smallest_degree(self) -> int | None:
         if self.is_null():
             return None
         if self.is_empty():
             return 0
-        smallest_degree = self.degree_of(self._vertexes[0])
-        for i in range(1, len(self._vertexes)):
-            current_vertex_degree = self.degree_of(self._vertexes[i])
+        smallest_degree = self.degree_of(self._vertices[0])
+        for i in range(1, len(self._vertices)):
+            current_vertex_degree = self.degree_of(self._vertices[i])
             if current_vertex_degree < smallest_degree:
                 smallest_degree = current_vertex_degree
         return smallest_degree
@@ -73,14 +77,20 @@ class Graph:
         if self.is_null():
             raise NonexistentVertexError(vertex_name)
         try:
-            self._vertexes.index(vertex_name)
+            self._vertices.index(vertex_name)
         except ValueError:
             raise NonexistentVertexError(vertex_name)
 
     def get_vertex_by_id(self, vertex_id: int) -> str | None:
         if self.is_null() or vertex_id < 1 or vertex_id > self.order():
             return None
-        return self._vertexes[vertex_id - 1]
+        return self._vertices[vertex_id - 1]
+
+    def has_edge_between(self, vertex1: str, vertex2: str) -> bool:
+        for edge in self._edges:
+            if edge.vertex1 == vertex1 and edge.vertex2 == vertex2 or edge.vertex1 == vertex2 and edge.vertex2 == vertex1:
+                return True
+        return False
 
     @property
     def name(self):
@@ -93,8 +103,8 @@ class Graph:
         self._name = new_name
 
     @property
-    def vertexes(self):
-        return self._vertexes
+    def vertices(self):
+        return self._vertices
 
     @property
     def edges(self):
