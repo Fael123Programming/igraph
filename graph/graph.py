@@ -1,5 +1,4 @@
-from graph.vertex import Vertex
-from graph.edge import Edge
+from edge import Edge
 from errors import ImpossibleToCreateEdgeError, NonexistentVertexError
 
 
@@ -29,18 +28,18 @@ class Graph:
     def is_empty(self):
         return self.size() == 0  # If there is no edges it is empty.
 
-    def create_edge_between(self, vertex1_name: str, vertex2_name: str):
+    def create_edge_between(self, vertex1: str, vertex2: str):
         if self.order() < 2:
             raise ImpossibleToCreateEdgeError()
-        self.check_if_exists(vertex1_name)  # May raise NonexistentVertexError
-        self.check_if_exists(vertex2_name)  # May raise NonexistentVertexError
-        self._edges.append(Edge(vertex1_name, vertex2_name))
+        self.check_if_exists(vertex1)  # May raise NonexistentVertexError
+        self.check_if_exists(vertex2)  # May raise NonexistentVertexError
+        self._edges.append(Edge(vertex1, vertex2))
 
-    def degree_of(self, vertex_name: str) -> int:
-        self.check_if_exists(vertex_name)  # May raise NonexistentVertexError
+    def degree_of(self, vertex: str) -> int:
+        self.check_if_exists(vertex)  # May raise NonexistentVertexError
         degree = 0
         for edge in self._edges:
-            if edge.vertex1_name == vertex_name or edge.vertex2_name == vertex_name:
+            if edge.vertex1 == vertex or edge.vertex2 == vertex:
                 degree += 1
         return degree
 
@@ -48,8 +47,8 @@ class Graph:
         if self.is_null() or self.is_empty():
             return False
         odd_vertexes = 0
-        for vertex_name in self._vertexes:
-            if self.degree_of(vertex_name) % 2 == 1:
+        for vertex in self._vertexes:
+            if self.degree_of(vertex) % 2 == 1:
                 odd_vertexes += 1
         return odd_vertexes == 2 or odd_vertexes == 0
 
@@ -78,7 +77,7 @@ class Graph:
         except ValueError:
             raise NonexistentVertexError(vertex_name)
 
-    def get_vertex_by_id(self, vertex_id: int) -> Vertex | None:
+    def get_vertex_by_id(self, vertex_id: int) -> str | None:
         if self.is_null() or vertex_id < 1 or vertex_id > self.order():
             return None
         return self._vertexes[vertex_id - 1]

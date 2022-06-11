@@ -1,15 +1,15 @@
 class Edge:
-    def __init__(self, vertex1_name: str, vertex2_name: str):
-        self._vertex1_name = vertex1_name
-        self._vertex2_name = vertex2_name
+    def __init__(self, vertex1: str, vertex2: str):
+        self._vertex1 = vertex1
+        self._vertex2 = vertex2
 
     @property
-    def vertex1_name(self):
-        return self._vertex1_name
+    def vertex1(self):
+        return self._vertex1
 
     @property
-    def vertex2_name(self):
-        return self._vertex2_name
+    def vertex2(self):
+        return self._vertex2
 
     def __str__(self):
-        return f"({self._vertex1_name})----({self._vertex2_name})"
+        return f"({self._vertex1})----({self._vertex2})"
