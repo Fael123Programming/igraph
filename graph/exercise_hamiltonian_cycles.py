@@ -17,8 +17,8 @@ if __name__ == '__main__':
     g3.create_edge_between('5', '1')
     g3.create_edge_between('1', '6')
     g3.create_edge_between('5', '6')
-    hpf = HamiltonianCycleFinder(g3)
-    print(hpf.find_all())
+    hcf = HamiltonianCycleFinder(g3)
+    print(hcf.find_all())
     print(f'{g3.name} is ', end='')
     if g3.is_hamiltonian():
         print('hamiltonian!')
