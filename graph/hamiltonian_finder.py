@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
-import graph as gh
+from graph import Graph
 
 
 class HamiltonianFinder(ABC):
     __slots__ = ['_underlying_graph', '_path']
 
-    def __init__(self, underlying_graph: gh.Graph):
+    def __init__(self, underlying_graph: Graph):
         self._underlying_graph = underlying_graph
         self._path = []
 
@@ -14,8 +14,8 @@ class HamiltonianFinder(ABC):
         return self._underlying_graph
 
     @underlying_graph.setter
-    def underlying_graph(self, underlying_graph: gh.Graph):
-        if underlying_graph is None or not isinstance(underlying_graph, gh.Graph):
+    def underlying_graph(self, underlying_graph: Graph):
+        if underlying_graph is None or not isinstance(underlying_graph, Graph):
             return
         self._underlying_graph = underlying_graph
 
