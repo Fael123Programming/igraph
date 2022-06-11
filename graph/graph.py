@@ -1,4 +1,4 @@
-from edge import Edge
+from graph.edge import Edge
 from errors import ImpossibleToCreateEdgeError, NonexistentVertexError
 
 

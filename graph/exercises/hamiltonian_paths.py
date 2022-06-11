@@ -1,9 +1,9 @@
-from graph import Graph
-from hamiltonian_path_finder import HamiltonianPathFinder
+from graph.graph import Graph
+from graph.hamiltonian_path_finder import HamiltonianPathFinder
 
 if __name__ == '__main__':
     g1 = Graph('g1')
-    # Enter the link to see this graph more graphically
+    # Go to the following link to see this graph more graphically
     # https://github.com/Fael123Programming/igraph/blob/main/graph/graph_images/g1.png
     g1.add_vertex('1')
     g1.add_vertex('2')
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # '2', '4', '5', '6', '7'], ['3', '2', '1', '4', '5', '6', '7'], ['5', '6', '7', '4', '1', '2', '3'], ['7', '6', '5'
     # , '4', '1', '2', '3']]
     g2 = Graph('g2')
-    # Enter the link to see this graph more graphically
+    # Go to the following link to see this graph more graphically
     # https://github.com/Fael123Programming/igraph/blob/main/graph/graph_images/g2.png
     g2.add_vertex('1')
     g2.add_vertex('2')
