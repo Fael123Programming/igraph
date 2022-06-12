@@ -28,15 +28,15 @@ class HamiltonianFinder(ABC):
         if starting_vertex != starting_edge.vertex1 and starting_vertex != starting_edge.vertex2:
             # If starting_vertex does not belong to starting edge.
             return None
-        self._find_path(starting_vertex, id_starting_edge)
+        self._find_path(starting_vertex, id_starting_edge)  # n*k
         result = self._path.copy()
         self._path.clear()
         return result
 
-    def _find_path(self, vertex: str, edge_id: int):
+    def _find_path(self, vertex: str, edge_id: int):  # n*k
         self._path.append(vertex)
         next_vertex = self._find_next_vertex(vertex, edge_id)
-        next_edge_id = self._find_next_edge_id(next_vertex)
+        next_edge_id = self._find_next_edge_id(next_vertex)  # k
         if next_edge_id == -1:
             self._path.append(next_vertex)
             return
@@ -44,7 +44,7 @@ class HamiltonianFinder(ABC):
 
     def _find_next_edge_id(self, vertex: str) -> int:
         edges = self._underlying_graph.edges
-        for i in range(0, len(edges)):
+        for i in range(0, len(edges)):  # k
             current_edge = edges[i]
             vertex1 = current_edge.vertex1
             vertex2 = current_edge.vertex2

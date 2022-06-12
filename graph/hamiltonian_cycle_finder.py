@@ -12,12 +12,12 @@ class HamiltonianCycleFinder(HamiltonianFinder):
         cycles = []
         vertices = self.underlying_graph.vertices
         edges = self.underlying_graph.edges
-        for vertex_id in range(len(vertices)):
+        for vertex_id in range(len(vertices)):  # n
             current_vertex = vertices[vertex_id]
-            for edge_id in range(len(edges)):
+            for edge_id in range(len(edges)):  # k
                 current_edge = edges[edge_id]
                 if current_edge.vertex1 == current_vertex or current_edge.vertex2 == current_vertex:
-                    path = self.find_permutation(current_vertex, edge_id)
+                    path = self.find_permutation(current_vertex, edge_id)  # n*k
                     path_len = len(path)
                     if path_len == len(vertices) and self.underlying_graph.has_edge_between(path[0], path[path_len - 1]):
                         cycles.append(path + [path[0]])

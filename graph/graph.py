@@ -47,8 +47,8 @@ class Graph:
         if self.is_null() or self.is_empty():
             return False
         odd_vertices = 0
-        for vertex in self._vertices:
-            if self.degree_of(vertex) % 2 == 1:
+        for vertex in self._vertices:  # It is executed n times, where n is the quantity of vertices
+            if self.degree_of(vertex) % 2 == 1:  # It brings a cost of k where k is the quantity of edges.
                 odd_vertices += 1
         return odd_vertices == 2 or odd_vertices == 0
 
